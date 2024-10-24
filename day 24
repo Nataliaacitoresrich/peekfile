@@ -1,0 +1,69 @@
+#UNIT 2 exercises
+#Next, create a bash script peek.sh in a new github repository called peekfile, that prints the first three and last three lines of an input file specified on the command line, with a "..." line in the middle. So that, for example, this:
+#repository created in github, then:
+cd alg/software/
+git clone https://github.com/Nataliaacitoresrich/peekfile.git
+cd peekfile
+gted peek.sh
+#write in the script: head -n3 "$1" 
+echo "..."
+tail -n3 "$1"
+#Fijate que entre las comillas no hemos puesto: ya que no queremos que en el output nos diga nada. 
+
+bash peek.sh ~/alg/dataset1/tables/target_prokaryotes.txt 
+
+bash peek.sh tables/target_prokaryotes.txt
+
+
+
+#Upload a working version to git.
+git add peek.sh
+git status
+git commit -m "version1"
+git push
+
+#Next, edit peek.sh so that it requires two arguments: (1) a file and (2) the number of lines to display on each end. For example, the output above should be displayed when running:
+
+bash peek.sh tables/target_prokaryotes.txt 3
+cd alg/software/
+git clone https://github.com/Nataliaacitoresrich/peekfile.git
+cd peekfile
+gted peek.sh
+#wrote in peek.sh: 
+head -n"$2" "$1" 
+echo "..."
+tail -n"$2" "$1"
+bash peek.sh ~/alg/dataset1/tables/target_prokaryotes.txt 3
+
+#Update your remote version at github
+git add peek.sh
+git status
+git commit -m "version2"
+git push
+
+
+
+#UNIT 3 exercises
+
+#Can you use the newly learned command separator to test if these are considered "errors"?
+sh$ grep something textfile    
+Is it an error if the something is not present in textfile? 
+####SCRIPT
+cd alg/dataset1/
+find . -name "textfile" #there is not any file with that name, so we have to create it.
+>textfile
+grep something textfile || echo there is an error
+Yes, it is an error. 
+
+sh$ find . -name "*fa"
+Is it an error if no .fa files are found? No it not an error. 
+
+#Can you find out what causes an error (with the meaning above) for grep: 
+    • reading a non-existent file? There is an error.
+    • not finding any matching lines? It is not an actually an error although if you put: grep something textfile || echo there is an error → the output will be there is an error. Pero en chat gpt nos dice que realmente no es un error porque no encontrar matches esta dentro del funcionamiento de grep. 
+    • reading an existent and a non-existent file? There is an error. Para la existing file funciona normla, però para la no existing file, generará un error message. 
+#And for find: 
+    • not finding any matching files or directories? It is not an actual error as it is in the find behavour not to have a match. 
+    • encountering a folder without permissions? This is an error as find can not work. 
+#Can you create a command line where wc causes an error?
+wc -l ishdifha → it has an errror because the is not a file or directory with this name.
