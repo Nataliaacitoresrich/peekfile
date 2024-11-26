@@ -10,5 +10,9 @@ if [[ ! "$2" ]]; then N="0"; else N="$2"; fi
 #1st: Number of fasta files
 echo The number of Fasta files is $(find $X -type f -name "*.fa" -or -name "*.fasta" | wc -l )
 
-#2nd: For each fasta file how many unique Fasta IDs are there
-find $X -type f -name "*.fa" -or -name "*.fasta" | while read i; do echo $i; grep ">" $i; done #####continuar para que me coja el ID, probablemente con sort, mirar que lo separa si espacio o tab o ns, ahora mismo es como si tuviera una tabla
+echo " " #adding an space
+
+#2nd: For each fasta file how many unique Fasta IDs are there. #First finding each fasta file, and for each file echoing the name and print the number of unique Fasta IDs in the next line.
+find $X -type f -name "*.fa" -or -name "*.fasta" | while read i; do echo ======$i; (grep ">" $i | awk '{split($0,A,/ /); print A[1]}'| sort -n | uniq -c | awk -F' ' '$1==1{print $1}' | sort |uniq -c |awk -F' ' '{print $1}'); done
+
+
