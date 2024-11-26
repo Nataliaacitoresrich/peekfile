@@ -15,4 +15,11 @@ echo " " #adding an space
 #2nd: For each fasta file how many unique Fasta IDs are there. #First finding each fasta file, and for each file echoing the name and print the number of unique Fasta IDs in the next line.
 find $X -type f -name "*.fa" -or -name "*.fasta" | while read i; do echo ======$i; (grep ">" $i | awk '{split($0,A,/ /); print A[1]}'| sort -n | uniq -c | awk -F' ' '$1==1{print $1}' | sort |uniq -c |awk -F' ' '{print $1}'); done
 
+##3rd: Printing for each file 
+#defining variable for filename
+filename=$(find $X -type f -name "*.fa" -or -name "*.fasta")
+
+#Header with: filename, number of sequences inside, total sequences length in each file and type.
+echo $(for i in $filename; do echo ======$i;grep ">" $i | wc -l;grep -v -h ">" $filename | awk '{print length $0}'; done)
+#count of sequences: grep -v -h ">" $filename | awk '{print length $0}'
 
