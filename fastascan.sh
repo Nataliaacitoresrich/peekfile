@@ -18,8 +18,12 @@ find $X -type f -name "*.fa" -or -name "*.fasta" | while read i; do echo ======$
 ##3rd: Printing for each file 
 #defining variable for filename
 filename=$(find $X -type f -name "*.fa" -or -name "*.fasta")
-
+#defining string of aa that are not nucleotides: 
+aa_non_nt=$(echo R N D Q E H I L K M F P S W Y V)
 #Header with: filename, number of sequences inside, total sequences length in each file and type.
 echo $(for i in $filename; do echo ======$i;grep ">" $i | wc -l;grep -v -h ">" $filename | awk '{print length $0}'; done)
 #count of sequences: grep -v -h ">" $filename | awk '{print length $0}'
+#print aa if the sequences have aminoacids, and nt if the sequences have nucleotides. 
+echo $(for i in $filename; do echo ======$i;grep ">" $i | wc -l;grep -v -h ">" $filename | awk -v aa_nt_awk="$aa_non_nt" '($0~aa_nt_awk) {print "AA" "" length $0}' '($0!~aa_nt_awk) {print "AA" "" length $0}'; done) #####acabar de corregir 
+
 
