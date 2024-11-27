@@ -21,8 +21,11 @@ filename=$(find $X -type f -name "*.fa" -or -name "*.fasta")
 #defining string of aa that are not nucleotides: 
 aa_non_nt="[RNDQEHILKMFPSWYV]" 
 #Header with: filename, number of sequences inside, total sequences length in each file and type.
-echo $(for i in $filename; do echo ======$i;grep ">" $i | wc -l;grep -v -h ">" $i| awk '{print length $0}'; done)
 #count of sequences: grep -v -h ">" $filename | awk '{print length $0}'
 #print aa if the sequences have aminoacids, and nt if the sequences have nucleotides. 
 for i in $filename; do echo ======$i;grep ">" $i | wc -l;grep -v -h ">" $i | awk -v aa_nt_awk="$aa_non_nt" '{if ($0~aa_nt_awk) {print "AA" " " length} else {print "NT" " " length}}'; done #####que no cuente gaps o spaces en las secuecias , crear con awk quitar gaps o lo uqe sea 
+#TRATAMIENTO GAPS, SPACES I NEWLINES
+for i in $filename; do echo ======$i;grep ">" $i | wc -l;grep -v -h ">" $i | awk '
+        { gsub("-", ""); gsub(" ", "");  gsub ("\n",""); print $0}' |awk  -v aa_nt_awk="$aa_non_nt" '{if ($0~aa_nt_awk) {print "AA" " " length} else {print "NT" " " length}}'; done
+        
 
