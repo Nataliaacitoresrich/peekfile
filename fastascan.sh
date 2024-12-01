@@ -1,6 +1,9 @@
+##Midterm 3, Natalia Acitores Rich. Master in Bioinformatics for health sciences, UPF. 
+
+
 ####Defining variables for the report
 #creating the variables X, indicating the input folder.
-if [[ -d "$1" ]]; then 		#checking the first argument is a folder, otherwise it could be the input number for variable N.
+if [[ -d "$1" ]]; then 		#checking if the first argument is a folder, otherwise it could be the input number for variable N.
 if [[ ! "$1" ]]
 then X="$(pwd)"
 else
