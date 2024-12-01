@@ -1,4 +1,4 @@
-##Midterm 3, Natalia Acitores Rich. Master in Bioinformatics for health sciences, UPF. 
+##Midterm 3. Master in Bioinformatics for health sciences, UPF. 
 
 
 ####Defining variables for the report

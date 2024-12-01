@@ -1,4 +1,4 @@
-###AI version of the Midterm3, Natalia Acitores Rich
+###AI version of the Midterm3. 
 
 #### Defining Variables for the Report ####
 
